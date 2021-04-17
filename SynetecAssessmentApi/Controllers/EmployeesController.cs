@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 namespace SynetecAssessmentApi.Controllers
 {
     [Route("api/[controller]")]
-    public class BonusPoolController : Controller
+    public class EmployeesController : Controller
     {
         private readonly IBonusCalculator _bonusCalculator;
-        private readonly IEmployeeService _employeeService; 
-        public BonusPoolController(IBonusCalculator bonusCalculator, IEmployeeService employeeService)
+        private readonly IEmployeeService _employeeService;
+        public EmployeesController(IBonusCalculator bonusCalculator, IEmployeeService employeeService)
         {
             _bonusCalculator = bonusCalculator ?? throw new ArgumentNullException(nameof(bonusCalculator));
             _employeeService = employeeService ?? throw new ArgumentNullException(nameof(employeeService));
@@ -24,10 +24,11 @@ namespace SynetecAssessmentApi.Controllers
             return await _employeeService.GetAsync();
         }
 
-        [HttpPost()]
-        public async Task<BonusPoolCalculatorResultDto> CalculateBonus([FromBody] [Required] CalculateBonusDto request)
+        [HttpGet]
+        [Route("{employeeId}/bonus")]
+        public async Task<BonusPoolCalculatorResultDto> CalculateBonus([FromRoute][Required] int employeeId, [FromQuery][Required] int totalBonusPool)
         {
-            return await _bonusCalculator.Calculate(request.SelectedEmployeeId, request.TotalBonusPoolAmount);
+            return await _bonusCalculator.Calculate(employeeId, totalBonusPool);
         }
     }
 }
