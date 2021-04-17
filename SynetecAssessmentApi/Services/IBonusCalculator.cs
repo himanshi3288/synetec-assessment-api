@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SynetecAssessmentApi.Dtos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,6 +20,6 @@ namespace SynetecAssessmentApi.Services
         /// Bonus Amount.
         /// Throws EmployeeNotFound exception in case employee is not found in the system.
         /// </returns>
-        Decimal Calculate(int employeeId);
+        Task<BonusPoolCalculatorResultDto> Calculate(int employeeId, int bonusPoolAmount);
     }
 }

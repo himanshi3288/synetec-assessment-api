@@ -1,4 +1,5 @@
-﻿using SynetecAssessmentApi.Dtos;
+﻿using SynetecAssessmentApi.Domain;
+using SynetecAssessmentApi.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,13 +24,13 @@ namespace SynetecAssessmentApi.Services
         /// </summary>
         /// <param name="id">Id for the employee</param>
         /// <returns>Employee object Or NULL.</returns>
-        Task<EmployeeDto> Get(int id);
+        Task<EmployeeDto> GetAsync(int id);
 
         /// <summary>
         /// Get Queryable reference to Employee list. 
         /// This enables to perform operations like SUM, COUNT directly on dbContext. But also does not exposes dbContext out of service.
         /// </summary>
         /// <returns></returns>
-        IQueryable<EmployeeDto> GetQueryable();
+        IQueryable<Employee> GetQueryable();
     }
 }
