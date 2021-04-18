@@ -15,7 +15,7 @@ namespace SynetecAssessmentApi.Services
             _employeeService = employeeService ?? throw new ArgumentNullException(nameof(employeeService));
         }
 
-        async Task<BonusPoolCalculatorResultDto> IBonusCalculator.Calculate(int employeeId, int bonusPoolAmount)
+        public async Task<BonusPoolCalculatorResultDto> Calculate(int employeeId, int bonusPoolAmount)
         {
             //load the details of the selected employee using the Id
             var employee = await _employeeService.GetAsync(employeeId);
